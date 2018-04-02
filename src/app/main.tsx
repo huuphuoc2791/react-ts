@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 import * as classNames from "classnames";
 import * as React from "react";
-import * as ReactDOM from "@types/react-dom";
+import * as ReactDOM from "react-dom";
 import {Model} from "./models/Model";
 import {Info} from "./components/Info";
 import {Button} from "reactstrap";
@@ -12,7 +12,7 @@ import List from "./components/List";
 
 const api = 'https://jsonplaceholder.typicode.com/users';
 
-export class main extends React.Component {
+export class main extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
@@ -37,6 +37,10 @@ export class main extends React.Component {
         )
     }
 
+    parentCallback = () => {
+        return this.state.persons;
+    }
+
 
     render() {
         const {persons, infoStatus} = this.state;
@@ -44,6 +48,7 @@ export class main extends React.Component {
         var test = persons.map(function (item: any) {
             return <option key={item.id}>{item.username}</option>
         })
+        let name = "Phuoc";
 
         return [
             <Header key={"1"}/>,
@@ -52,11 +57,10 @@ export class main extends React.Component {
                        type="text"/>
                 <select>{test}</select>
                 <Button color="danger">Danger!</Button>
-                <List name={"Phuoc"} age={30}/>
+                <List name={name} age={30} callBackfromParent={this.parentCallback}/>
             </div>,
             <Info key={"4"}/>,
             <Tabs key={"3"}/>];
-
 
     }
 }

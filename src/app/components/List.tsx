@@ -8,8 +8,7 @@ import * as classNames from 'classnames';
 
 const api = 'https://jsonplaceholder.typicode.com/users';
 
-
-export default class List extends React.Component {
+export default class List extends React.Component<any, any> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -35,23 +34,23 @@ export default class List extends React.Component {
                 console.log('Error when loading')
             }
         )
-        console.log("Did mounted: ", this.state)
+        // console.log("Did mounted: ", this.state)
     }
 
     componentDidUpdate(prevProps: any, prevState: any) {
-        console.log("Did updated:", prevState);
+        // console.log("Did updated:", prevState);
     }
 
     componentDidCatch() {
-        console.log("Did catch: ", this.state);
+        // console.log("Did catch: ", this.state);
     }
 
     componentWillUnmount() {
-        console.log("Will unmounted:", this.state);
+        // console.log("Will unmounted:", this.state);
     }
 
     componentWillUpdate(nextProps: any, nextState: any) {
-        console.log("Will updated:", this.state);
+        // console.log("Will updated:", this.state);
     }
 
     componentWillMount() {
@@ -64,15 +63,15 @@ export default class List extends React.Component {
             mode = 'middle';
         }
         this.setState({mode});
-        console.log("Will mounted:", this.state);
+        // console.log("Will mounted:", this.state);
     }
 
     componentWillReceiveProps() {
-        console.log("Will recieve props:", this.props);
+        // console.log("Will recieve props:", this.props);
     }
 
     shouldComponentUpdate(nextProps: any, nextState: any) {
-        console.log("Should Update", nextState, nextProps);
+        // console.log("Should Update", nextState, nextProps);
 
         // if (!_.isEqual(nextState.persons,this.state.persons)) {
         //     return true;
@@ -82,9 +81,16 @@ export default class List extends React.Component {
 
     }
 
+    getList = () => {
+        let persons = this.props.callBackfromParent();
+        let list = persons && persons.map((item: any) => {
+            return <li key={item.name}>{item.name}</li>
+        });
+        return list;
+    }
+
     render() {
         console.log("Render: ", this.state);
-
         let {persons, selectedOption} = this.state;
         let list = persons && persons.map((item: any) => {
             return {value: item.username, label: item.name};
@@ -100,7 +106,10 @@ export default class List extends React.Component {
             options={list}
         />, <div key={"33"} className={classNames('person', this.state.mode)}>
             {this.props.name} (age: {this.props.age})
-            <div>{ value}</div>
+            <div>{value}</div>
+            <div>
+                <ul>{this.getList()}</ul>
+            </div>
         </div>];
     }
 }
