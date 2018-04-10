@@ -1,12 +1,9 @@
 import {observable, computed} from "mobx";
 import _ from "lodash";
+import {Base} from "./Base";
 
-export class Model {
+export class Model extends Base {
     persons = [];
-
-    constructor() {
-
-    }
 
     componentDidMount() {
         fetch('https://jsonplaceholder.typicode.com/users').then(result => {
@@ -18,4 +15,8 @@ export class Model {
         })
         console.log(this.persons);
     }
+}
+
+const Auth = () => {
+
 }

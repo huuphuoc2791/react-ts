@@ -5,20 +5,46 @@ import 'react-select/dist/react-select.css';
 import * as _ from 'lodash';
 import {Model} from "../models/Model";
 import * as classNames from 'classnames';
+import {Person} from "../models/Person";
 
 const api = 'https://jsonplaceholder.typicode.com/users';
 
-export default class List extends React.Component<any, any> {
-    constructor(props: any) {
+interface IDashboardProps {
+    age: number;
+    name: string;
+    callBackfromParent: any;
+}
+
+interface IDashboardState {
+    persons: string[];
+    selectedOption: any;
+    infoStatus: string;
+    mode: string;
+
+}
+
+export default class List extends React.Component<IDashboardProps, IDashboardState> {
+    constructor(props: IDashboardProps) {
         super(props);
         this.state = {
             persons: [],
+            selectedOption: {label: '', value: ''},
+            infoStatus: '',
+            mode: ''
         }
     }
 
     handleChange(selectedOption: any) {
-        this.setState({selectedOption});
+        this.setState({selectedOption: selectedOption});
         console.log(`Selected: ${selectedOption.label}`);
+    }
+
+    public handleOnClick(event: any): void {
+        console.log("Click", event);
+    }
+
+    identity<T>(arg: T): T {
+        return arg;
     }
 
     componentDidMount() {
@@ -28,13 +54,13 @@ export default class List extends React.Component<any, any> {
         }).then(response => {
             self.setState({
                 persons: response,
+                infoStatus: 'success'
             });
         }).catch(reason => {
                 self.setState({infoStatus: 'error'});
                 console.log('Error when loading')
             }
         )
-        // console.log("Did mounted: ", this.state)
     }
 
     componentDidUpdate(prevProps: any, prevState: any) {
@@ -76,15 +102,18 @@ export default class List extends React.Component<any, any> {
         // if (!_.isEqual(nextState.persons,this.state.persons)) {
         //     return true;
         // }
-        // return false;
-        return true;
+        return this.props === nextProps;
+        // return true;
 
     }
 
-    getList = () => {
+    private getList = () => {
         let persons = this.props.callBackfromParent();
+        let httpText = 'http://www.';
         let list = persons && persons.map((item: any) => {
-            return <li key={item.name}>{item.name}</li>
+            return <li key={item.id}>{item.name} ({item.username}) -
+                website: <a target={"_blank"} href={httpText + item.website}>{httpText + item.website}</a> -
+                company: <b>{item.company.name}</b></li>
         });
         return list;
     }
@@ -96,7 +125,6 @@ export default class List extends React.Component<any, any> {
             return {value: item.username, label: item.name};
         })
         let value = selectedOption && selectedOption.value;
-
         return [<Select
             key={"212"}
             name="select-form"
@@ -106,7 +134,7 @@ export default class List extends React.Component<any, any> {
             options={list}
         />, <div key={"33"} className={classNames('person', this.state.mode)}>
             {this.props.name} (age: {this.props.age})
-            <div>{value}</div>
+            <div onClick={e => this.handleOnClick(e)}>{value}</div>
             <div>
                 <ul>{this.getList()}</ul>
             </div>

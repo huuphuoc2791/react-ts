@@ -11,6 +11,7 @@ module.exports = {
         path: r`dist`,
         filename: "[name]-[hash].js",
         chunkFilename: "[name]-[hash].js",
+        // publicPath: "/",
     },
     resolve: {
         extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
@@ -20,6 +21,9 @@ module.exports = {
         },
     },
     devtool: 'source-map',
+    devServer: {
+        historyApiFallback: true,
+    },
     module: {
         rules: [
             {test: /\.css$/, loader: "style-loader!css-loader"},
@@ -37,6 +41,10 @@ module.exports = {
             {manifest: 'app-entry'},
         ),
         // generates an index.html
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin(
+            {
+                template:'./src/app/template/index.html'
+            },
+        ),
     ],
 };

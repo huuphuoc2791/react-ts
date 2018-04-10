@@ -1,13 +1,15 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Components = require("./app/main");
+import {BrowserRouter} from 'react-router-dom';
 
 function render(target: HTMLDivElement, components: typeof Components) {
-    ReactDOM.render(<components.main/>, target);
+    ReactDOM.render(<BrowserRouter>
+        <components.main/>
+    </BrowserRouter>, target);
 }
 
 const target = document.createElement("div");
-target.className = "container";
 render(target, Components);
 document.body.appendChild(target);
 

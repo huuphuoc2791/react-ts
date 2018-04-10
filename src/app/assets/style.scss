@@ -1,8 +1,14 @@
 @import 'global/base';
 
-input{
+input {
   background-color: #dcd1e7;
 }
-.container > div{
-  padding: 8px;
+
+.container.content {
+  margin-top: 1em;
+}
+
+.carousel-item {
+  height: 400px;
+  width: 100%;
 }

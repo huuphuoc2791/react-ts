@@ -2,13 +2,16 @@ import {observer} from "mobx-react";
 import * as classNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {Model} from "./models/Model";
-import {Info} from "./components/Info";
-import {Button} from "reactstrap";
-import Header from "./components/Header";
-import {Tabs} from "./components/Tabs";
+import Header from "./components/common/Header";
 import "assets/style.scss";
-import List from "./components/List";
+import Dashboard from "./components/Dashboard";
+import {
+    BrowserRouter as Router,
+    Route,
+    Link, NavLink,Switch
+} from 'react-router-dom';
+import About from "./components/About";
+import Contact from "./components/Contact";
 
 const api = 'https://jsonplaceholder.typicode.com/users';
 
@@ -37,30 +40,18 @@ export class main extends React.Component<any, any> {
         )
     }
 
-    parentCallback = () => {
-        return this.state.persons;
-    }
-
-
     render() {
-        const {persons, infoStatus} = this.state;
-
-        var test = persons.map(function (item: any) {
-            return <option key={item.id}>{item.username}</option>
-        })
-        let name = "Phuoc";
-
         return [
             <Header key={"1"}/>,
-            <div key={"2"}>
-                <input className={"btn"}
-                       type="text"/>
-                <select>{test}</select>
-                <Button color="danger">Danger!</Button>
-                <List name={name} age={30} callBackfromParent={this.parentCallback}/>
-            </div>,
-            <Info key={"4"}/>,
-            <Tabs key={"3"}/>];
+            <div className={"container content"} key={"2"}>
+                <Switch>
+                    <Route path='/about' component={About}/>
+                    <Route path='/contact' component={Contact}/>
+                    <Route path='/' component={Dashboard}/>
+                    <Route path='/home' component={Dashboard}/>
+                    <Route component={Dashboard}/>
+                </Switch>
 
+            </div>];
     }
 }
