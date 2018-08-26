@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as classnames from "classnames";
-import {TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col} from 'reactstrap';
+import GoogleLoginAuth from "./LoginSocialAuth";
 
 interface IContactProps {
 
@@ -18,6 +18,6 @@ export default class Contact extends React.Component<IContactProps, IContactStat
     }
 
     render() {
-        return <div>Contact Component</div>;
+        return <div><GoogleLoginAuth></GoogleLoginAuth></div>;
     }
 }

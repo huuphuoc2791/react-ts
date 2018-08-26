@@ -16,7 +16,7 @@ interface IDashboardProps {
 interface IDashboardState {
     name: string;
     status: string;
-    persons: string[]
+    persons: any[]
 
 }
 const api = 'https://jsonplaceholder.typicode.com/users';
@@ -46,18 +46,12 @@ export default class Dashboard extends React.Component<IDashboardProps, IDashboa
 
     render() {
         const {persons} = this.state;
-
-        var test = persons.map(function (item: any) {
-            return <option key={item.id}>{item.username}</option>
-        })
         let name = "Phuoc";
         return [
             <SlideCarousel key={"eew"}/>,
-            <div className={"form-group"} key={"sds"}>
-                <input className={"form-control btn"}
+            <div className={"form-group mt-4"} key={"sds"}>
+                <input className={"form-control btn btn-info mb-2"}
                        type="text" placeholder={"Please enter input"}/>
-                <select className={"form-control"}>{test}</select>
-                <button className={"btn btn-primary"} color="danger">Danger!</button>
                 <List name={name} age={28} callBackfromParent={this.parentCallback}/>
             </div>,
             <Info key={"4"}/>,

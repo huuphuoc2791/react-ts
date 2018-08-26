@@ -1,6 +1,6 @@
 import {observable, computed} from "mobx";
 import * as React from "react";
-import "assets/info.scss";
+import "assets/styles/info.scss";
 
 export class Info extends React.Component {
     price = 10;

@@ -4,8 +4,6 @@ import {
     Route,
     Link, NavLink
 } from 'react-router-dom';
-import Dashboard from "./Dashboard";
-import About from "./About";
 
 export default class Header extends React.Component <any, any> {
 
@@ -41,14 +39,11 @@ export default class Header extends React.Component <any, any> {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto ml-auto">
-                            <li className="nav-item active">
-                                {/*<a className="nav-link" href="#">Home </a>*/}
-                                <Link className="nav-link"
-                                      to="/home">Home<span className="sr-only">(current)</span></Link>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" exact to="/home">Home</NavLink>
                             </li>
                             <li className="nav-item">
-                                {/*<a className="nav-link" href="#">About</a>*/}
-                                <Link className="nav-link" to="/about">About</Link>
+                                <NavLink className="nav-link" to="/about">About</NavLink>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle"
@@ -68,9 +63,7 @@ export default class Header extends React.Component <any, any> {
                                 </div>
                             </li>
                             <li className="nav-item">
-                                {/*<a className="nav-link" href="/contact">Contact</a>*/}
-                                <Link className="nav-link" to="/contact">Contact</Link>
-
+                                <NavLink className="nav-link" to="/contact">Contact</NavLink>
                             </li>
                         </ul>
                         <form className="form-inline my-2 my-lg-0">
@@ -83,8 +76,6 @@ export default class Header extends React.Component <any, any> {
                     </div>
                 </div>
             </nav>
-
-
         );
     }
 }

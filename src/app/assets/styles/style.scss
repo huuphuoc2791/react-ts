@@ -1,0 +1,30 @@
+@import 'global/base';
+
+input {
+  background-color: #dcd1e7;
+}
+
+.container.content {
+  margin-top: 1em;
+  padding-bottom: 16px;
+}
+
+.carousel-item {
+  height: 400px;
+  width: 100%;
+}
+
+.footer {
+ //margin-top: 8px;
+  position: fixed;
+  bottom: 0;
+}
+
+.body {
+  position: relative;
+  margin-bottom: 16px;
+
+}
+.kep-login-facebook .metro{
+  height: 20px !important;
+}

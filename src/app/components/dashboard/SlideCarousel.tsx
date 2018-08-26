@@ -1,5 +1,4 @@
 import * as React from "react";
-import "assets/style.scss";
 
 export default class SlideCarousel extends React.Component <any, any> {
     constructor(props: any) {

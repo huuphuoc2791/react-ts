@@ -3,12 +3,14 @@ import * as classNames from "classnames";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Header from "./components/common/Header";
-import "assets/style.scss";
+import Footer from "./components/common/Footer";
+import "assets/styles/style.scss";
 import Dashboard from "./components/Dashboard";
+import * as $ from "jquery";
 import {
     BrowserRouter as Router,
     Route,
-    Link, NavLink,Switch
+    Link, NavLink, Switch
 } from 'react-router-dom';
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -19,26 +21,14 @@ export class main extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
-        this.state = {
-            persons: [],
-        }
     }
 
     componentDidMount() {
-        const main = this;
-        fetch(api).then(result => {
-            return result.json();
-        }).then(response => {
-            main.setState({
-                persons: response
-            });
-            main.setState({infoStatus: 'loaded'});
-        }).catch(reason => {
-                main.setState({infoStatus: 'error'});
-                console.log('Error when loading', reason)
-            }
-        )
+
+        $.ajax(api).then((data) => {
+        })
     }
+
 
     render() {
         return [
@@ -47,11 +37,11 @@ export class main extends React.Component<any, any> {
                 <Switch>
                     <Route path='/about' component={About}/>
                     <Route path='/contact' component={Contact}/>
-                    <Route path='/' component={Dashboard}/>
+                    <Route path='/' component={Dashboard} extra/>
                     <Route path='/home' component={Dashboard}/>
-                    <Route component={Dashboard}/>
+                    <Route path='*' component={Dashboard}/>
                 </Switch>
-
-            </div>];
+            </div>,
+            <Footer key={"eerr"}/>];
     }
 }

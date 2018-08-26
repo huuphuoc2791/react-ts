@@ -10,7 +10,9 @@ function render(target: HTMLDivElement, components: typeof Components) {
 }
 
 const target = document.createElement("div");
+target.className = "body";
 render(target, Components);
+
 document.body.appendChild(target);
 
 declare var module: { hot?: { accept: (componentName: string, callback: () => void) => void } };
